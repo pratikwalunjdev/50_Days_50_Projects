@@ -1,0 +1,149 @@
+/* Import Poppins font for a modern, techy look */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap');
+
+/* Universal box-sizing and reset */
+* {
+  box-sizing: border-box;
+}
+
+/* Body styling for the dark, cyber-themed background */
+body {
+  /* Dark background color */
+  background-color: #1a1a2e;
+  /* Using a radial gradient for a subtle spotlight effect */
+  background-image: radial-gradient(
+    circle,
+    rgba(26, 26, 46, 1) 0%,
+    rgba(16, 16, 32, 1) 100%
+  ); 
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden; /* Hide scrollbars */
+}
+
+/* Navigation container styling */
+nav {
+  /* Glassmorphism effect: semi-transparent background */
+  background-color: rgba(255, 255, 255, 0.05);
+  /* Frosted glass effect */
+  backdrop-filter: blur(15px);
+  padding: 20px;
+  width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  /* Subtle border to enhance the glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* Cybermorphic glow effect */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1),
+    0 0 20px rgba(76, 201, 240, 0.3);
+  transition: width 0.6s linear;
+  overflow-x: hidden;
+}
+
+/* Active state for the navigation (when expanded) */
+nav.active {
+  width: 350px;
+}
+
+/* Unordered list containing navigation links */
+nav ul {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 0;
+  /* Smooth transition for the width */
+  transition: width 0.6s linear;
+}
+
+/* Active state for the list (when nav is expanded) */
+nav.active ul {
+  width: 100%;
+}
+
+/* List items */
+nav ul li {
+  /* Start transparent and slightly shifted for a staggered animation */
+  opacity: 0;
+  transform: translateX(20px);
+  /* Staggered animation for each list item */
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+/* Active state for list items */
+nav.active ul li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Adding a delay to each list item for a sequential animation effect */
+nav.active ul li:nth-child(1) { transition-delay: 0.2s; }
+nav.active ul li:nth-child(2) { transition-delay: 0.3s; }
+nav.active ul li:nth-child(3) { transition-delay: 0.4s; }
+nav.active ul li:nth-child(4) { transition-delay: 0.5s; }
+
+/* Navigation links */
+nav ul a {
+  position: relative;
+  color: #e0e0e0; /* Light text color for dark theme */
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect for links - makes them glow */
+nav ul a:hover {
+  color: #4cc9f0; /* Bright cyan color on hover */
+}
+
+/* The hamburger icon button */
+.icon {
+  background-color: transparent; /* Transparent background */
+  border: 0;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  height: 30px;
+  width: 30px;
+}
+
+/* Remove focus outline */
+.icon:focus {
+  outline: 0;
+}
+
+/* Lines that form the hamburger icon */
+.icon .line {
+  background-color: #4cc9f0; /* Bright cyan color for the lines */
+  height: 2px;
+  width: 20px;
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  /* Smooth transition for the transform property */
+  transition: transform 0.6s linear;
+}
+
+/* Position for the second line */
+.icon .line2 {
+  top: auto;
+  bottom: 10px;
+}
+
+/* Animation for the first line when nav is active (forms a cross) */
+nav.active .icon .line1 {
+  /* Rotates and moves to form one part of the 'X' */
+  transform: rotate(-765deg) translateY(5.5px); /* 765deg = 2 full rotations + 45deg */
+}
+
+/* Animation for the second line when nav is active */
+nav.active .icon .line2 {
+  /* Rotates and moves to form the other part of the 'X' */
+  transform: rotate(765deg) translateY(-5.5px);
+}
