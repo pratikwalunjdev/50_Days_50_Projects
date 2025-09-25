@@ -1,18 +1,29 @@
+<!-- The DOCTYPE declaration defines the document type to be HTML5 -->
 <!DOCTYPE html>
+<!-- The root element of an HTML page, with the language set to English -->
 <html lang="en">
+<!-- The <head> element is a container for metadata (data about data) -->
 <head>
+    <!-- Specifies the character encoding for the HTML document -->
     <meta charset="UTF-8">
+    <!-- Sets the viewport to make the website look good on all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to the Font Awesome CSS library for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
       crossorigin="anonymous"/>
+    <!-- Link to the external stylesheet -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- The title of the document, shown in the browser's title bar or in the page's tab -->
     <title>3D Boxes Background</title>
 </head>
+<!-- The <body> tag defines the document's body, and is a container for all the visible contents -->
 <body>
-    <button id="btn" class="magic">Magic 🎩</button>
-    <div id="boxes" class="boxes big"></div>
+    <!-- A button element that triggers the animation. It has an ID for JavaScript selection and a class for styling. -->
+    <button id="btn" class="magic"><i class="fas fa-cubes"></i> Magic 🎩</button>
+    <!-- A container div for the 3D boxes. It has an ID for JavaScript and a class for styling. -->
+    <div id="boxes" class="boxes"></div>
+    <!-- Link to the external JavaScript file -->
     <script src="script.js"></script>
-    
 </body>
 </html>

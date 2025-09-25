@@ -1,92 +1,189 @@
+/* Import Google Fonts for use in the project */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
+/* Universal selector to apply basic resets */
 * {
+    /* The box-sizing property includes padding and border in the element's total width and height */
     box-sizing: border-box;
 }
 
+/* Keyframes for the button's glowing pulse animation */
+@keyframes glowing-pulse {
+    0% { box-shadow: 0 0 5px #f9ca24, 0 0 10px #f9ca24; } /* Start of animation: small glow */
+    50% { box-shadow: 0 0 20px #f9ca24, 0 0 30px #f9ca24; } /* Mid-animation: larger glow */
+    100% { box-shadow: 0 0 5px #f9ca24, 0 0 10px #f9ca24; } /* End of animation: back to small glow */
+}
+
+/* Keyframes for the color cycling effect on the box sides */
+@keyframes color-cycle {
+    0% { background-color: #f9ca24; } /* Yellow */
+    25% { background-color: #ff7979; } /* Red */
+    50% { background-color: #badc58; } /* Green */
+    75% { background-color: #7ed6df; } /* Cyan */
+    100% { background-color: #f9ca24; } /* Back to Yellow */
+}
+
+/* Styling for the body element */
 body{
-    background-color: #fafafa;
+    /* Sets a dark background color for the page for a more "techy" feel */
+    background-color: #111;
+    /* Sets the default font for the page */
     font-family: 'Roberto', sans-serif;
+    /* Use flexbox for layout */
     display: flex;
+    /* Stack flex items vertically */
     flex-direction: column;
+    /* Center items horizontally */
     align-items: center;
+    /* Center items vertically */
     justify-content: center;
+    /* Make the body take up the full viewport height */
     height: 100vh;
+    /* Hide any content that overflows the body */
     overflow: hidden;
 }
 
+/* Styling for the magic button */
 .magic {
+    /* Background color of the button */
     background-color: #f9ca24;
+    /* Text color */
     color: #fff;
+    /* Font for the button text */
     font-family: 'Poppins', sans-serif;
+    /* Remove the default border */
     border: 0;
+    /* Apply rounded corners */
     border-radius: 3px;
+    /* Font size of the text */
     font-size: 16px;
+    /* Padding inside the button */
     padding: 12px 20px;
+    /* Change cursor to a pointer on hover */
     cursor: pointer;
+    /* Position the button from the top */
     top: 20px;
+    /* Spacing between letters */
     letter-spacing: 1px;
-    box-shadow: 0 3px rgba(249,202,36,0.5);
+    /* Add a shadow for a 3D effect and apply the glowing animation */
+    animation: glowing-pulse 2s infinite;
+    /* Ensure the button is on top of other elements */
     z-index: 100;
+    /* Smooth transition for transformations */
+    transition: transform 0.1s ease;
 }
 
+/* Styling for the button when it is focused */
 .magic:focus {
+    /* Remove the default outline that appears on focus */
     outline: none;
 }
 
+/* Styling for the button when it is being clicked */
 .magic:active {
+    /* Remove the box-shadow to create a "pressed" effect */
     box-shadow: none;
+    /* Move the button down slightly to enhance the pressed effect */
     transform: translateY(2px);
 }
 
+/* Styling for the container of all the boxes */
 .boxes {
+    /* Use flexbox to arrange the boxes */
     display: flex;
+    /* Allow boxes to wrap to the next line if they don't fit */
     flex-wrap: wrap;
+    /* Distribute space around the boxes */
     justify-content: space-around;
+    /* Set the height of the container */
     height: 500px;
+    /* Set the width of the container */
     width: 500px;
+    /* Position relative to allow absolute positioning of children */
     position: relative;
+    /* Smooth transition for size changes */
     transition: 0.4s ease;
 }
 
+/* Styling for the container when it has the 'big' class */
 .boxes.big {
+    /* Increase the height of the container */
     height: 600px;
+    /* Increase the width of the container */
     width: 600px;
 }
 
+/* Styling for individual boxes when the container is 'big' */
 .boxes.big .box {
-    transform: rotateZ(360deg);
+    /* Apply a more complex 3D rotation */
+    transform: rotateX(360deg) rotateY(360deg);
 }
 
+/* Styling for each individual box */
 .box{
-    background-image: url('https://media.giphy.com/media/EZqwsBSPlvSda/giphy.gif');
+    /* Set the background image for the boxes using a CSS variable for dynamic changes via JS */
+    background-image: var(--meme-bg);
+    /* Prevent the background image from repeating */
     background-repeat: no-repeat;
+    /* Set the size of the background image to cover the entire grid */
     background-size: 500px 500px;
+    /* Position relative to allow absolute positioning of pseudo-elements */
     position: relative;
+    /* Set the height of each box */
     height: 125px;
+    /* Set the width of each box */
     width: 125px;
+    /* Smooth transition for transformations */
     transition: 0.4s ease;
 }
 
+/* Add a hover effect to each box */
+.box:hover {
+    /* Make the box slightly larger on hover */
+    transform: scale(1.1);
+    /* Add a "techy" green glow */
+    box-shadow: 0 0 15px #badc58;
+    /* Ensure the hovered box appears on top of others */
+    z-index: 2;
+}
+
+/* Pseudo-element to create the right 3D side of the box */
 .box::after {
+    /* Required for pseudo-elements */
     content: '';
-    background-color: #f6e58d;
+    /* Animate the background color using the 'color-cycle' keyframes */
+    animation: color-cycle 5s linear infinite;
+    /* Position the element absolutely relative to the .box */
     position: absolute;
+    /* Position from the top */
     top: 8px;
+    /* Position from the right, creating the side */
     right: -15px;
+    /* Match the height of the box */
     height: 100%;
+    /* Set the width of the side */
     width: 15px;
+    /* Skew the element to create a 3D perspective */
     transform: skewY(45deg);
 }
 
+/* Pseudo-element to create the bottom 3D side of the box */
 .box::before {
+    /* Required for pseudo-elements */
     content: '';
-    background-color: #f9ca24;
+    /* Animate the background color using the 'color-cycle' keyframes */
+    animation: color-cycle 5s linear infinite;
+    /* Position the element absolutely relative to the .box */
     position: absolute;
+    /* Position from the bottom, creating the side */
     bottom: -15px;
+    /* Position from the left */
     left: 8px;
+    /* Set the height of the side */
     height: 15px;
+    /* Match the width of the box */
     width: 100%;
+    /* Skew the element to create a 3D perspective */
     transform: skewX(45deg);
 }
