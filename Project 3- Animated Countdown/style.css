@@ -1,0 +1,271 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  --primary-color: #00ffff; /* Neon Cyan */
+  --accent-color: #ff00ff;  /* Neon Magenta */
+  --background-color: #0d0221; /* Deep Indigo */
+
+  font-family: 'Share Tech Mono', monospace;
+  background-color: var(--background-color);
+  color: var(--primary-color);
+  margin: 0;
+  height: 100vh;
+  overflow: hidden; /* Keep this to hide scrollbars */
+  position: relative;
+  animation: screen-flicker 15s infinite;
+}
+
+/* Scanline Effect */
+body::after {
+  content: ' ';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.25) 50%
+    ),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
+
+@keyframes screen-flicker {
+  0%, 100% { opacity: 1; }
+  49.9% { opacity: 1; }
+  50% { opacity: 0.7; }
+  50.1% { opacity: 1; }
+  74.9% { opacity: 1; }
+  75% { opacity: 0.6; }
+  75.1% { opacity: 1; }
+}
+
+h4 {
+  font-size: 20px;
+  margin: 5px;
+  text-transform: uppercase;
+  text-shadow: 0 0 5px var(--primary-color), 0 0 15px var(--primary-color);
+  animation: text-flicker 3s infinite;
+  position: relative;
+}
+
+h1 {
+  text-shadow: 0 0 10px var(--accent-color), 0 0 30px var(--accent-color);
+  animation: text-flicker 2s infinite reverse;
+  position: relative;
+}
+
+.counter {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.counter.hide {
+  transform: translate(-50%, -50%) scale(0);
+  animation: hide 0.2s ease-out;
+}
+
+@keyframes hide {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+}
+
+.final {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  text-align: center;
+}
+
+.final.show {
+  transform: translate(-50%, -50%) scale(1);
+  animation: show 0.2s ease-out;
+}
+
+@keyframes show {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  30% {
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.nums {
+  color: var(--primary-color);
+  font-size: 50px;
+  position: relative;
+  overflow: hidden;
+  width: 250px;
+  height: 50px;
+}
+
+.nums span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(120deg);
+  transform-origin: bottom center;
+  text-shadow: 0 0 5px var(--primary-color), 0 0 25px var(--primary-color), 0 0 50px var(--primary-color);
+}
+
+h1, h4, .nums span {
+  letter-spacing: 2px;
+}
+
+/* Glitch Effect */
+.nums span::before,
+.nums span::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-color);
+  overflow: hidden;
+}
+
+.nums span::before {
+  left: 3px;
+  text-shadow: -2px 0 var(--accent-color);
+  animation: glitch-1 2.5s linear infinite reverse;
+}
+
+.nums span::after {
+  left: -3px;
+  text-shadow: -2px 0 var(--primary-color);
+  animation: glitch-2 1.5s linear infinite reverse;
+}
+
+/* Apply glitch to headers too */
+h1::before, h1::after, h4::before, h4::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-color);
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+}
+
+@keyframes glitch-1 {
+  0% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.3deg); } 5% { clip: rect(17px, 9999px, 96px, 0); } 10% { clip: rect(40px, 9999px, 66px, 0); } 15% { clip: rect(87px, 9999px, 82px, 0); } 20% { clip: rect(130px, 9999px, 100px, 0); } 25% { clip: rect(50px, 9999px, 148px, 0); } 30% { clip: rect(25px, 9999px, 34px, 0); } 35% { clip: rect(67px, 9999px, 117px, 0); } 40% { clip: rect(146px, 9999px, 133px, 0); } 45% { clip: rect(13px, 9999px, 59px, 0); } 50% { clip: rect(42px, 9999px, 44px, 0); } 55% { clip: rect(67px, 9999px, 117px, 0); } 60% { clip: rect(40px, 9999px, 66px, 0); } 65% { clip: rect(87px, 9999px, 82px, 0); } 70% { clip: rect(130px, 9999px, 100px, 0); } 75% { clip: rect(50px, 9999px, 148px, 0); } 80% { clip: rect(25px, 9999px, 34px, 0); } 85% { clip: rect(13px, 9999px, 59px, 0); } 90% { clip: rect(146px, 9999px, 133px, 0); } 95% { clip: rect(42px, 9999px, 44px, 0); } 100% { clip: rect(17px, 9999px, 96px, 0); }
+}
+@keyframes glitch-2 {
+  0% { clip: rect(85px, 9999px, 99px, 0); transform: skew(0.2deg); } 5% { clip: rect(29px, 9999px, 78px, 0); } 10% { clip: rect(55px, 9999px, 135px, 0); } 15% { clip: rect(14px, 9999px, 43px, 0); } 20% { clip: rect(120px, 9999px, 12px, 0); } 25% { clip: rect(88px, 9999px, 49px, 0); } 30% { clip: rect(1px, 9999px, 86px, 0); } 35% { clip: rect(109px, 9999px, 144px, 0); } 40% { clip: rect(142px, 9999px, 136px, 0); } 45% { clip: rect(23px, 9999px, 70px, 0); } 50% { clip: rect(85px, 9999px, 99px, 0); } 55% { clip: rect(109px, 9999px, 144px, 0); } 60% { clip: rect(55px, 9999px, 135px, 0); } 65% { clip: rect(14px, 9999px, 43px, 0); } 70% { clip: rect(120px, 9999px, 12px, 0); } 75% { clip: rect(88px, 9999px, 49px, 0); } 80% { clip: rect(1px, 9999px, 86px, 0); } 85% { clip: rect(23px, 9999px, 70px, 0); } 90% { clip: rect(142px, 9999px, 136px, 0); } 95% { clip: rect(85px, 9999px, 99px, 0); } 100% { clip: rect(29px, 9999px, 78px, 0); }
+}
+
+@keyframes text-flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% { text-shadow: 0 0 4px var(--primary-color), 0 0 11px var(--primary-color), 0 0 19px var(--primary-color); }
+  20%, 24%, 55% { text-shadow: none; }
+}
+
+.nums span.in {
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: goIn 0.5s ease-in-out;
+}
+
+.nums span.out {
+  animation: goOut 0.5s ease-in-out;
+}
+
+@keyframes goIn {
+  0% {
+    transform: translate(-50%, -50%) rotate(120deg);
+  }
+
+  30% {
+    transform: translate(-50%, -50%) rotate(-20deg);
+  }
+
+  60% {
+    transform: translate(-50%, -50%) rotate(10deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+}
+
+@keyframes goOut {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  60% {
+    transform: translate(-50%, -50%) rotate(20deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(-120deg);
+  }
+}
+
+#replay{
+  background-color: transparent;
+  border-radius: 3px;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  font-family: inherit;
+  padding: 8px 15px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-shadow: 0 0 5px var(--accent-color);
+}
+
+#replay:hover {
+  background-color: var(--accent-color);
+  color: var(--background-color);
+}
+
+#replay span{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.3s;
+}
+
+#replay span:after{
+  content: ' >';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+#replay:hover span{
+  padding-right: 20px;
+}
+
+#replay:hover span:after{
+  opacity: 1;
+  right: 0;
+}
