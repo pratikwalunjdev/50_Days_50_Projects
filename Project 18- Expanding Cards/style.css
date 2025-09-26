@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --panel-transition-duration: 0.7s;
+  --text-transition-delay: 0.5s;
+  --background-color: #1a1a1a;
+  --panel-border-radius: 25px;
+  --overlay-color: rgba(0, 0, 0, 0.4);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  background-color: var(--background-color);
+}
+
+.container {
+  display: flex;
+  width: 90vw;
+}
+
+.panel {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  border-radius: var(--panel-border-radius);
+  color: #fff;
+  cursor: pointer;
+  flex: 1;
+  margin: 10px;
+  position: relative;
+  transition: flex var(--panel-transition-duration) cubic-bezier(0.075, 0.82, 0.165, 1);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--overlay-color);
+  border-radius: var(--panel-border-radius);
+  opacity: 1;
+  transition: opacity var(--panel-transition-duration) ease-in-out;
+}
+
+.panel h3 {
+  font-size: 24px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.3s ease-in, transform 0.4s ease-in;
+}
+
+.panel.active {
+  flex: 8;
+}
+
+.panel.active::before {
+  opacity: 0;
+}
+
+.panel.active h3 {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-in var(--text-transition-delay), transform 0.4s ease-in var(--text-transition-delay);
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100vw;
+  }
+
+  .panel:nth-of-type(4),
+  .panel:nth-of-type(5) {
+    display: none;
+  }
+}
