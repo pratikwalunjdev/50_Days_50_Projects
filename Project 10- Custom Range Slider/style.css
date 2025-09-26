@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #1a1a1a;
+  color: #eee;
+  font-family: 'Roboto Mono', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+h2 {
+  position: absolute;
+  top: 30px;
+  color: #00bfff; /* Deep sky blue for a techy feel */
+  text-shadow: 0 0 5px #00bfff;
+}
+
+.range-container {
+  position: relative;
+}
+
+input[type='range'] {
+  width: 300px;
+  margin: 18px 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+
+input[type='range']:focus {
+  outline: none;
+}
+
+/* --- Webkit (Chrome, Safari) --- */
+input[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  background: linear-gradient(to right, #00bfff 50%, #333 50%);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+  transition: background 0.2s ease-in-out;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #00bfff;
+  cursor: pointer;
+  margin-top: -7px; /* (track-height - thumb-height) / 2 - border-width */
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
+  transition: transform 0.2s ease-in-out;
+}
+
+input[type='range']:active::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
+/* --- Mozilla (Firefox) --- */
+input[type='range']::-moz-range-track {
+  width: 100%;
+  height: 10px;
+  cursor: pointer;
+  background: #333;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+}
+
+input[type='range']::-moz-range-thumb {
+  height: 20px; /* Adjusted for border */
+  width: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #00bfff;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
+  transition: transform 0.2s ease-in-out;
+}
+
+input[type='range']:active::-moz-range-thumb {
+    transform: scale(1.2);
+}
+
+/* Add fill for Firefox */
+input[type='range']::-moz-range-progress {
+  background-color: #00bfff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 191, 255, 0.5);
+}
+
+/* --- Label Styling --- */
+.range-container label {
+  background-color: #00bfff;
+  color: #1a1a1a;
+  position: absolute;
+  top: -35px;
+  left: 50%; /* Initial position, will be updated by JS */
+  width: 80px;
+  padding: 8px 0;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.7);
+  transform: translateX(-50%) translateY(5px); /* Start slightly lower */
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Complex ease for bounce effect */
+  opacity: 0;
+  pointer-events: none; /* So it doesn't interfere with mouse events */
+}
+
+.range-container input:active + label {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0); /* Move to final position */
+}
+
+.range-container input:focus + label {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
